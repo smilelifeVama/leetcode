@@ -41,6 +41,7 @@
 
 // @lc code=start
 class Solution {
+    // 1.第n阶台阶 等于 n-2级台阶 加上 n-1级台阶
     public int climbStairs(int n) {
         if (n == 1) {
             return 1;
@@ -48,12 +49,13 @@ class Solution {
         if (n == 2) {
             return 2;
         }
-        int prevRes = 1;
-        int res = 2;
+        int res = 0;
+        int a1 = 1;
+        int a2 = 2;
         for (int i = 3; i <= n; i++) {
-            int temp = res;
-            res = prevRes + res;
-            prevRes = temp;
+            res = a1 + a2;
+            a1 = a2;
+            a2 = res; 
         }
         return res;
     }

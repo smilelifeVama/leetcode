@@ -1,1 +1,1 @@
-maxArea
+isPalindrome
