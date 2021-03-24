@@ -47,6 +47,10 @@ class Solution {
         }
         return prev;
     }
+
+    private class ListNode{
+        public ListNode next;
+    }
 }
 // @lc code=end
 
