@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -44,16 +45,26 @@ class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
         Arrays.sort(nums);
         List<List<Integer>> resList = new ArrayList<>();
-        HashMap<Integer, Integer> maps = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            int target = 0 - nums[i];
-            maps.clear();
-            for (int j = i + 1; j < nums.length; j++) {
-                int needValue = target - nums[j];
-                if (maps.containsKey(needValue)) {
-                    resList.add(new ArrayList<Integer>(Arrays.asList(needValue, nums[j], nums[i])));
-                }else {
-                    maps.put(nums[j], j);
+        for (int i = 0; i < nums.length - 2; i ++) {
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            if (nums[i] > 0) break;
+            int left = i + 1;
+            int right = nums.length - 1;
+            while (left < right) {
+                if (nums[left] + nums[right] == - nums[i]) {
+                    ArrayList<Integer> items = new ArrayList<>();
+                    items.add(nums[i]);
+                    items.add(nums[left]);
+                    items.add(nums[right]);
+                    resList.add(items);
+                    while (left < right && nums[right] == nums[--right]);
+                    while (left < right && nums[left] == nums[++left]);
+                } else if (nums[left] + nums[right] > -nums[i]) {
+                    while (left < right && nums[right] == nums[--right]);
+                } else {
+                    while (left < right && nums[left] == nums[++left]);
                 }
             }
         }
